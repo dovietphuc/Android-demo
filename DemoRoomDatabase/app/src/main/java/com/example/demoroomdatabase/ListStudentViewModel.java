@@ -37,4 +37,5 @@ public class ListStudentViewModel extends AndroidViewModel {
     public void delete(int uid){
         mRepository.delete(uid);
     }
+
 }
