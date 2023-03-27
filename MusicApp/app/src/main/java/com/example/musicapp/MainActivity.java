@@ -10,9 +10,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.app.Service;
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.util.Log;
 import android.view.View;
 
 import java.util.List;
@@ -33,40 +39,63 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+    SongListAdapter mAdapter;
+    private MusicService.MusicBinder mBinder;
+    private ServiceConnection mConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+            Log.d("PhucDVb", "onServiceConnected: ");
+            mBinder = (MusicService.MusicBinder) iBinder;
+            mBinder.getMusics().observe(MainActivity.this, new Observer<List<Song>>() {
+                @Override
+                public void onChanged(List<Song> songs) {
+                    if(mBinder.getMusicController().isPlaying()) {
+                        mAdapter.status = SongListAdapter.PLAY;
+                    } else {
+                        mAdapter.status = SongListAdapter.STOP;
+                    }
+                    mAdapter.setCurrentIndex(mBinder.getMusicController().getCurrentIndex());
+                    mAdapter.setData(songs);
+                }
+            });
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName componentName) {
+            Log.d("PhucDVb", "onServiceDisconnected: ");
+        }
+    };
 
     public void init(){
         mViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
 
         RecyclerView recyclerView = findViewById(R.id.rcv_list_song);
-        SongListAdapter adapter = new SongListAdapter(this);
-        recyclerView.setAdapter(adapter);
+        mAdapter = new SongListAdapter(this);
+        recyclerView.setAdapter(mAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        mViewModel.getAllMusic().observe(this, new Observer<List<Song>>() {
-            @Override
-            public void onChanged(List<Song> songs) {
-                adapter.setData(songs);
-            }
-        });
+        Intent intent = new Intent(this, MusicService.class);
+        startForegroundService(intent);
+        bindService(intent, mConnection, Service.BIND_AUTO_CREATE);
 
-        adapter.setOnItemClickListener(new SongListAdapter.OnItemClickListener() {
+        mAdapter.setOnItemClickListener(new SongListAdapter.OnItemClickListener() {
             @Override
             public void onClick(View v, int position) {
-                if(position == mViewModel.getMusicController().getCurrentIndex()){
-                    if(mViewModel.getMusicController().isPlaying()) {
-                        adapter.status = SongListAdapter.STOP;
-                        mViewModel.getMusicController().pause();
+                if(position == mBinder.getMusicController().getCurrentIndex()){
+                    if(mBinder.getMusicController().isPlaying()) {
+                        mAdapter.status = SongListAdapter.STOP;
+                        mBinder.pause();
                         v.setBackgroundColor(Color.YELLOW);
                     } else {
-                        adapter.status = SongListAdapter.PLAY;
-                        mViewModel.getMusicController().start();
+                        mAdapter.status = SongListAdapter.PLAY;
+                        mBinder.getMusicController().start();
                         v.setBackgroundColor(Color.GREEN);
                     }
                 } else {
-                    adapter.status = SongListAdapter.PLAY;
-                    adapter.setCurrentIndex(position);
-                    adapter.notifyItemChanged(mViewModel.getMusicController().getCurrentIndex());
-                    mViewModel.getMusicController().playSongAt(MainActivity.this, position);
+                    mAdapter.status = SongListAdapter.PLAY;
+                    mAdapter.setCurrentIndex(position);
+                    mAdapter.notifyItemChanged(mBinder.getMusicController().getCurrentIndex());
+                    mBinder.playSongAt(position);
                     v.setBackgroundColor(Color.GREEN);
                 }
             }
@@ -83,5 +112,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbindService(mConnection);
+    }
 }

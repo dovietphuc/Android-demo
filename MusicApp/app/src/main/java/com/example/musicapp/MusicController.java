@@ -50,6 +50,7 @@ public class MusicController {
     }
 
     public void playNext() {
+        if(mMusicSource == null) return;
         if(mMusicSource.getSize() != 0) {
             if (mCurrentIndex < mMusicSource.getSize() - 1) {
                 mCurrentIndex++;
@@ -61,6 +62,7 @@ public class MusicController {
     }
 
     public void playPrev() {
+        if(mMusicSource == null) return;
         if(mMusicSource.getSize() != 0) {
             if (mCurrentIndex > 0) {
                 mCurrentIndex--;
@@ -81,6 +83,7 @@ public class MusicController {
 
     public void playSongAt(Context context, int index) {
         mMediaPlayer.reset();
+        if(mMusicSource == null) return;
         Uri trackUri = ContentUris.withAppendedId(
                 MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, mMusicSource.getAtIndex(index).getId());
         try {
