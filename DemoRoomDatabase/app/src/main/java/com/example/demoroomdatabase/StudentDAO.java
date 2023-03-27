@@ -22,6 +22,9 @@ public interface StudentDAO {
 
     @Query("DELETE FROM student WHERE uid = :uid")
     public void delete(int uid);
+
+    @Query("SELECT * FROM student WHERE state = 1")
+    public List<Student> getAllStudentNoAsyn();
 }
 
 

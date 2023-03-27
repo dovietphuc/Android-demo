@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <queries>
+        <provider
+            android:authorities="com.example.demoroomdatabase" />
+        <package android:name="com.example.demoroomdatabase" />
+    </queries>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -10,7 +16,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.DemoRoomDatabase"
+        android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
             android:name=".MainActivity"
@@ -25,12 +31,6 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
-        <provider
-            android:authorities="com.example.demoroomdatabase"
-            android:name=".ExampleProvider"
-            android:exported="true" />
-
     </application>
 
 </manifest>
