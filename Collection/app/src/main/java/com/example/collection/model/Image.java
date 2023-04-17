@@ -1,6 +1,8 @@
 package com.example.collection.model;
 
-public class Image {
+import java.io.Serializable;
+
+public class Image implements Serializable {
     private long id;
     private String name;
     private String data;

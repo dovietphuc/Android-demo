@@ -2,16 +2,21 @@ package com.example.collection;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.collection.model.Image;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     MainActivityViewModel mViewModel;
@@ -22,6 +27,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     @Override
@@ -51,6 +61,13 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.action_change_password:
                 navController.navigate(R.id.changePasswordFragment);
+                return true;
+            case R.id.action_sync:
+                if(mViewModel.getAllImage().getValue() != null) {
+                    for (Image image : mViewModel.getAllImage().getValue()) {
+                        FireStoreHelper.addImageInfo(image);
+                    }
+                }
                 return true;
         }
         return super.onOptionsItemSelected(item);

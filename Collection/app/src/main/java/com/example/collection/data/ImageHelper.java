@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.loader.content.AsyncTaskLoader;
 
+import com.example.collection.FireStoreHelper;
 import com.example.collection.model.Image;
 
 import java.util.ArrayList;
@@ -51,7 +52,7 @@ public class ImageHelper {
         String[] projection = {
                 MediaStore.Images.ImageColumns._ID,
                 MediaStore.Images.ImageColumns.TITLE,
-                MediaStore.Images.ImageColumns.DATA
+                MediaStore.Images.ImageColumns.DATA,
         };
 
         String where = null;

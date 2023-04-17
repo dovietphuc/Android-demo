@@ -1,5 +1,7 @@
 package com.example.collection;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -16,7 +18,16 @@ public class FirebaseAuthHelper {
                                 , OnCompleteListener<AuthResult> listener){
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         firebaseAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(listener);
+                .addOnCompleteListener(listener)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()) {
+                            FireStoreHelper.addUser(task.getResult().getUser().getUid(),
+                                    task.getResult().getUser().getEmail());
+                        }
+                    }
+                });
     }
 
     public static void signIn(String email, String password
