@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.paging.PagingDataAdapter;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -18,13 +20,10 @@ import com.example.githubuser.model.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserViewHolder> {
+public class UserListAdapter extends PagingDataAdapter<User, UserListAdapter.UserViewHolder> {
 
-    private List<User> mData = new ArrayList<>();
-
-    public void setData(List<User> data){
-        mData = data;
-        notifyDataSetChanged();
+    public UserListAdapter(@NonNull DiffUtil.ItemCallback<User> diffCallback) {
+        super(diffCallback);
     }
 
     @NonNull
@@ -39,12 +38,7 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserVi
 
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
-        holder.bind(mData.get(position));
-    }
-
-    @Override
-    public int getItemCount() {
-        return mData.size();
+        holder.bind(getItem(position));
     }
 
     public class UserViewHolder extends RecyclerView.ViewHolder {

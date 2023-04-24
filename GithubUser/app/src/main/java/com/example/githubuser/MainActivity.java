@@ -7,11 +7,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
+import com.example.githubuser.adapter.UserDiff;
 import com.example.githubuser.adapter.UserListAdapter;
 import com.example.githubuser.databinding.ActivityMainBinding;
 import com.example.githubuser.model.User;
 
 import java.util.List;
+
+import autodispose2.AutoDispose;
+import autodispose2.androidx.lifecycle.AndroidLifecycleScopeProvider;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,14 +32,14 @@ public class MainActivity extends AppCompatActivity {
         mViewModel
                 = new ViewModelProvider(this).get(MainActivityViewModel.class);
 
-        UserListAdapter adapter = new UserListAdapter();
+        UserListAdapter adapter = new UserListAdapter(new UserDiff());
         mBinding.setUserAdapter(adapter);
 
-        mViewModel.getAllUsers().observe(this, new Observer<List<User>>() {
-            @Override
-            public void onChanged(List<User> users) {
-                adapter.setData(users);
-            }
-        });
+        mViewModel.flowable.to(AutoDispose.autoDisposable(AndroidLifecycleScopeProvider
+                        .from(this)))
+                .subscribe(userPagingData -> {
+                    adapter.submitData(getLifecycle(), userPagingData);
+                });
+
     }
 }

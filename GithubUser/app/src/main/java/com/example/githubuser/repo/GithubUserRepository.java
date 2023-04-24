@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.githubuser.api.GithubApi;
 import com.example.githubuser.api.GithubApiProvider;
 import com.example.githubuser.model.User;
+import com.example.githubuser.model.UserResults;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,20 +22,20 @@ public class GithubUserRepository {
         MutableLiveData<List<User>> liveData
                 = new MutableLiveData<>(new ArrayList<>());
 
-        GithubApi githubApi = GithubApiProvider.getGithubApi();
-        githubApi.getAllUsers().enqueue(new Callback<List<User>>() {
-            @Override
-            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
-                if(response.code() == 200) {
-                    liveData.setValue(response.body());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<User>> call, Throwable t) {
-                Log.e("PhucDVb", "onFailure: ", t);
-            }
-        });
+//        GithubApi githubApi = GithubApiProvider.getGithubApi();
+//        githubApi.getAllUsers(2, 20, "stackoverflow").enqueue(new Callback<UserResults>() {
+//            @Override
+//            public void onResponse(Call<UserResults> call, Response<UserResults> response) {
+//                if(response.code() == 200) {
+//                    liveData.setValue(response.body().users);
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<UserResults> call, Throwable t) {
+//                Log.e("PhucDVb", "onFailure: ", t);
+//            }
+//        });
 
         return liveData;
     }

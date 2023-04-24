@@ -4,15 +4,15 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class User {
-    @SerializedName("id")
+    @SerializedName("account_id")
     @Expose
     private int id;
 
-    @SerializedName("login")
+    @SerializedName("display_name")
     @Expose
     private String username;
 
-    @SerializedName("avatar_url")
+    @SerializedName("profile_image")
     @Expose
     private String avatarUrl;
 
