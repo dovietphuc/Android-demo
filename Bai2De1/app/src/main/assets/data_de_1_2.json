@@ -1,0 +1,20 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "message":"Hello"
+    },
+    {
+      "id": 1,
+      "message":"How are you ?"
+    },
+    {
+      "id": 0,
+      "message":"I'am fine, about you"
+    },
+    {
+      "id": 1,
+      "message":"OK"
+    }
+  ]
+}
