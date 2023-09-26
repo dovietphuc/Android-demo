@@ -1,0 +1,69 @@
+{
+  "articles": [
+{
+  "source": {
+    "id": null,
+    "name": "Monevator.com"
+  },
+  "author": "The Investor",
+  "title": "Weekend reading: Triage",
+  "description": "New experimental vaccine against Virus-related comments on Monevator, plus the week's good reads",
+  "url": "https://monevator.com/weekend-reading-triage/",
+  "urlToImage": "https://s3.cointelegraph.com/uploads/2020-10/58c4e11c-f57f-4c15-8df3-527abe7dd67e.jpg",
+  "publishedAt": "2020-10-31T09:06:08Z",
+  "content": "I reluctantly updated a lot of the technology that runs Monevator this week. And of course things broke.\r\nFor instance, pagination and numbering has come unstuck on the longer comment threads. For no… [+6544 chars]"
+},
+{
+"source": {
+"id": null,
+"name": "FXStreet"
+},
+"author": "Eren Sengezer",
+"title": "Bitcoin Price Analysis: BTC/USD continues to push higher toward $14,000",
+"description": "After climbing to its highest level since June 2019 at $13,863 on Wednesday, Bitcoin staged a technical correction and closed the day nearly 4% lower.",
+"url": "https://www.fxstreet.com/cryptocurrencies/news/bitcoin-price-analysis-btc-usd-continues-to-push-higher-toward-14-000-202010310901",
+"urlToImage": "https://editorial.fxstreet.com/images/Markets/Currencies/Digital Currencies/Bitcoin/Bitcoin_1_Large.jpg",
+"publishedAt": "2020-10-31T09:01:58Z",
+"content": "<ul><li>Bitcoin rises for the third straight day on Saturday.</li><li>RSI indicator on the daily chart continues to float above 70.</li><li>Technical correction is likely if BTC/USD fails to break ab… [+1161 chars]"
+},
+{
+"source": {
+"id": null,
+"name": "Cointelegraph"
+},
+"author": "Cointelegraph By Joseph Young",
+"title": "Why Bitcoin price and volume rising together is bad news for Ethereum, altseason",
+"description": "Bitcoin broke out of the $13,000 resistance level merely a week ago, which means those expecting Ethereum and altcoin prices to rise may have to wait a few months.",
+"url": "https://cointelegraph.com/news/why-bitcoin-price-and-volume-rising-together-is-bad-news-for-ethereum-altseason",
+"urlToImage": "https://s3.cointelegraph.com/uploads/2020-10/58c4e11c-f57f-4c15-8df3-527abe7dd67e.jpg",
+"publishedAt": "2020-10-31T09:00:00Z",
+"content": "Bitcoin (BTC) is sucking up the volume from the entire cryptocurrency market as it continues to rally. This is causing the alternative cryptocurrency (altcoin) market to pullback, which has seen risi… [+3555 chars]"
+},
+{
+"source": {
+"id": null,
+"name": "Cointelegraph"
+},
+"author": "Cointelegraph By Ray Salmond",
+"title": "Ethereum price ascending channel breakout possible if Bitcoin consolidates",
+"description": "Consolidation from Bitcoin would allow Ethereum to double bottom in its BTC pair and possibly breakout from the ascending channel in its USDT pair.",
+"url": "https://cointelegraph.com/news/ethereum-price-ascending-channel-breakout-possible-if-bitcoin-consolidates",
+"urlToImage": "https://s3.cointelegraph.com/uploads/2020-10/12a68e84-160b-4b5d-b50c-1916ecff0d8b.jpg",
+"publishedAt": "2020-10-31T07:29:41Z",
+"content": "In the past week, altcoins prices received a significant haircut, and investors who were light on Bitcoin (BTC) saw their portfolio value take a hit. \r\nInitially, Ether (ETH) price followed Bitcoin h… [+2945 chars]"
+},
+{
+"source": {
+"id": null,
+"name": "newsBTC"
+},
+"author": "Nick Chong",
+"title": "Expect Bitcoin to Break $14,000 Once Altcoin Bleeding Ends: Analyst",
+"description": "It’s been a brutal past few days and weeks for altcoins despite Bitcoin’s strength. Top digital assets aside from BTC have plunged a handful of percent, even dozens of percent, against the U.S. dollar, even as Bitcoin hits new year-to-date highs. This diverge…",
+"url": "https://www.newsbtc.com/analysis/btc/expect-bitcoin-to-break-14000-once-altcoin-bleeding-ends-analyst/",
+"urlToImage": "https://www.newsbtc.com/wp-content/uploads/2020/10/shawn-ang-AsE0yNC4UqM-unsplash-scaled.jpg",
+"publishedAt": "2020-10-31T07:00:40Z",
+"content": "It’s been a brutal past few days and weeks for altcoins despite Bitcoin’s strength. Top digital assets aside from BTC have plunged a handful of percent, even dozens of percent, against the U.S. dolla… [+2461 chars]"
+}
+]
+}
