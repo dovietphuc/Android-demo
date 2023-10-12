@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivity"
+    android:background="#F44336"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingHorizontal="20dp">
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CREATE ACCOUNT"
+        android:textColor="#ffffff"
+        android:textSize="30sp"
+        android:textStyle="bold"/>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/input_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:hint="Email"
+        android:textColorHint="#F44336"
+        android:padding="20dp"
+        android:layout_marginTop="10dp"
+        android:drawableStart="@drawable/baseline_email_24" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/input_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:hint="Username"
+        android:textColorHint="#F44336"
+        android:padding="20dp"
+        android:layout_marginTop="10dp"
+        android:drawableStart="@drawable/baseline_perm_contact_calendar_24" />
+
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/input_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:hint="Password"
+        android:textColorHint="#F44336"
+        android:inputType="numberPassword"
+        android:padding="20dp"
+        android:layout_marginTop="10dp"
+        android:drawableStart="@drawable/baseline_key_24" />
+
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/input_cf_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:hint="Confirm Password"
+        android:textColorHint="#F44336"
+        android:inputType="numberPassword"
+        android:padding="20dp"
+        android:layout_marginTop="10dp"
+        android:drawableStart="@drawable/baseline_key_24" />
+
+    <Button
+        android:id="@+id/btn_sign_in"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FFBC2D23"
+        android:text="SING IN" />
+
+
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FFBC2D23"
+        android:text="CANCEL" />
+
+
+</LinearLayout>
