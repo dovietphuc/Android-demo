@@ -1,6 +1,8 @@
 package com.example.filemanager;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.ContentResolver;
 import android.database.Cursor;
@@ -9,6 +11,13 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+
+import com.example.R;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -20,40 +29,59 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        File file = Environment.getExternalStorageDirectory();
-        logChild(file, 0);
-    }
+        MainActivityViewModel viewModel =
+                new ViewModelProvider(this).get(MainActivityViewModel.class);
 
-    public void logChild(File file, int level) {
-        StringBuilder tab = new StringBuilder();
-        for(int i = 0; i < level; i++) {
-            tab.append("\t");
-        }
-        Log.d("PhucDVb", tab + "|" + file.getName());
-        if(file.listFiles() != null) {
-            for (File child : file.listFiles()) {
-                logChild(child, level + 1);
+        ListFileFragment fragment = new ListFileFragment();
+
+        viewModel.getFiles(null).observe(this, fragment::setFiles);
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.fragment_host, fragment, "root_fragment")
+                .commit();
+
+        MobileAds.initialize(this);
+
+        AdView mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        mAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdClicked() {
+                super.onAdClicked();
             }
-        }
-    }
 
-//
-//    public File getRootFile(){
-//        Uri uri = MediaStore.Files.getContentUri("external");
-//        ContentResolver resolver = getContentResolver();
-//        Cursor cursor = resolver.query(uri,
-//                new String[]{MediaStore.Files.FileColumns.DATA},
-//                MediaStore.Files.FileColumns.PARENT + "=-1", null, null);
-//
-//        if(cursor != null) {
-//            while (cursor.moveToNext()) {
-//                int dataIndex = cursor.getColumnIndex(MediaStore.Files.FileColumns.DATA);
-//                String data = cursor.getString(dataIndex);
-//                return new File(data);
-//            }
-//            cursor.close();
-//        }
-//
-//        return null;
-//    }
+            @Override
+            public void onAdClosed() {
+                super.onAdClosed();
+            }
+
+            @Override
+            public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                super.onAdFailedToLoad(loadAdError);
+                Log.e("MainActivity", loadAdError.toString());
+            }
+
+            @Override
+            public void onAdImpression() {
+                super.onAdImpression();
+            }
+
+            @Override
+            public void onAdLoaded() {
+                super.onAdLoaded();
+            }
+
+            @Override
+            public void onAdOpened() {
+                super.onAdOpened();
+            }
+
+            @Override
+            public void onAdSwipeGestureClicked() {
+                super.onAdSwipeGestureClicked();
+            }
+        });
+    }
 }
